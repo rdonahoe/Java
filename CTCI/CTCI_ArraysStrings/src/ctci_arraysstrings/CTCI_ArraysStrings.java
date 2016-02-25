@@ -34,8 +34,14 @@ public class CTCI_ArraysStrings {
     character in an array and then update and check it as the string 
     is traversed.
     */
-//        
-//        for (String s : strs) {
+//        String[] str1 = {
+//            "tihs",             // true
+//            "w0uld th1s w0rk",  // false
+//            "Bran Donahoe",     // false
+//            "Jam Hilpret",      // true
+//            "String"            // true
+//        };
+//        for (String s : str1) {
 //            System.out.print(isUniq(s));
 //            System.out.print(", ");
 //            System.out.println(isUniq2(s));
@@ -49,7 +55,14 @@ public class CTCI_ArraysStrings {
     I did this in java just because that's what I am practicing. Although 
     I think this can be done more effeciently in C
     */
-//        for (String s : strs) {
+//        String[] str2 = {
+//            "tihs",             // true
+//            "w0uld th1s w0rk",  // false
+//            "Bran Donahoe",     // false
+//            "Jam Hilpret",      // true
+//            "String"            // true
+//        };
+//        for (String s : str2) {
 //            System.out.print(s);
 //            System.out.print("|");
 //            System.out.println(reverseString(s));
@@ -60,8 +73,23 @@ public class CTCI_ArraysStrings {
     1.3 Given two strings, write a method to decide if one is a permutation 
     of the other.
     */
+//        String[] str3_1 = {
+//            "this",             // true
+//            "wloud this krow",  // true
+//            "Ryan Donahoe",     // false
+//            "Jam Hilpret",      // true
+//            "String "           // false
+//        };
+//        String[] str3_2 = {
+//            "tihs",            
+//            "would this work",  
+//            "Bran Donahoe",     
+//            "Jim Halpret",     
+//            "String"            
+//        };
+//        
 //        for (int i = 0; i < strs.length; i++) {
-//            System.out.println(isPerm(strs[i], strs2[i]));
+//            System.out.println(isPerm(str3_1[i], str3_2[i]));
 //        }
 
     
@@ -83,10 +111,50 @@ public class CTCI_ArraysStrings {
     a2blc5a3. If the "compressed" string would not become smaller than the 
     original string, your method should return the original string.
     */  
-        for (String s : strs) {
-            System.out.println(compressString(s));
-        }
+//        String[] str5 = {
+//            "accccccccdda",         // true
+//            "ffffffgggghh",     // false
+//            "jj",               // false
+//            "abc",              // true
+//            "abbbbb"            // true
+//        };
+//        for (String s : str5) {
+//            System.out.println(compressString(s));
+//        }
         
+
+    /*
+    1.6 Given an image represented by an NxN matrix, where each pixel in 
+    the image is 4 bytes, write a method to rotate the image by 90 degrees. 
+    Can you do this in place?
+    */
+//        int mat6[][] = 
+//        {
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
+//        };
+//        turnNinety(mat6, 15);
+//        
+//        for(int[] i : mat6) {
+//            for(int j : i) {
+//                System.out.print(j);
+//                System.out.print(' ');
+//            }
+//            System.out.println();
+//        }
     }
     
     // 1.1
@@ -208,5 +276,27 @@ public class CTCI_ArraysStrings {
             return str;
         else
             return build.toString();
+    }
+
+    // 1.6
+    public static void turnNinety(int[][] m, int s) {
+        // it has to touch every item in the array so it is O(n^2) run, space O(1)
+        int temp, end;
+        
+        // outside loop tracks what layer of the matrix it is changing
+        for(int i = 0; i < s/2; i++) {
+            end = (s - i) - 1; // the end of the current layer
+            
+            // i variable is current start of the layer
+            for (int j = i, off = 0; j < end; j++, off++) {
+                
+                // rotate the current layer one point at a time
+                temp = m[i][j];
+                m[i][j] = m[end - off][i];
+                m[end - off][i] = m[end][end - off];
+                m[end][end - off] = m[j][end];
+                m[j][end] = temp;
+            }
+        }
     }
 }
