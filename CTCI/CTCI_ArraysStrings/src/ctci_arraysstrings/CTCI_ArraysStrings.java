@@ -8,22 +8,6 @@ import java.io.*;
  * @author Ryan Donahoe
  */
 public class CTCI_ArraysStrings {
-    
-    public static String[] strs = {
-            "accccccccdda",         // true
-            "ffffffgggghh",     // false
-            "jj",               // false
-            "abc",              // true
-            "abbbbb"            // true
-        };
-    
-    public static String[] strs2 = {
-            "tihs",             // true
-            "w0uld th1s w0rk",  // false
-            "Bran Donahoe",     // false
-            "Jam Hilpret",      // true
-            "String"            // true
-        };
 
     public static void main(String[] args) {
     /* 
@@ -34,18 +18,19 @@ public class CTCI_ArraysStrings {
     character in an array and then update and check it as the string 
     is traversed.
     */
-//        String[] str1 = {
-//            "tihs",             // true
-//            "w0uld th1s w0rk",  // false
-//            "Bran Donahoe",     // false
-//            "Jam Hilpret",      // true
-//            "String"            // true
-//        };
-//        for (String s : str1) {
-//            System.out.print(isUniq(s));
-//            System.out.print(", ");
-//            System.out.println(isUniq2(s));
-//        }
+        System.out.println("1.1 =");
+        String[] str1 = {
+            "tihs",             // true
+            "w0uld th1s w0rk",  // false
+            "Bran Donahoe",     // false
+            "Jam Hilpret",      // true
+            "String"            // true
+        };
+        for (String s : str1) {
+            System.out.print(isUniq(s));
+            System.out.print(", ");
+            System.out.println(isUniq2(s));
+        }
         
 
     /*
@@ -55,42 +40,44 @@ public class CTCI_ArraysStrings {
     I did this in java just because that's what I am practicing. Although 
     I think this can be done more effeciently in C
     */
-//        String[] str2 = {
-//            "tihs",             // true
-//            "w0uld th1s w0rk",  // false
-//            "Bran Donahoe",     // false
-//            "Jam Hilpret",      // true
-//            "String"            // true
-//        };
-//        for (String s : str2) {
-//            System.out.print(s);
-//            System.out.print("|");
-//            System.out.println(reverseString(s));
-//        }
+        System.out.println("1.2 ==");
+        String[] str2 = {
+            "tihs",             // true
+            "w0uld th1s w0rk",  // false
+            "Bran Donahoe",     // false
+            "Jam Hilpret",      // true
+            "String"            // true
+        };
+        for (String s : str2) {
+            System.out.print(s);
+            System.out.print("|");
+            System.out.println(reverseString(s));
+        }
 
 
     /*
     1.3 Given two strings, write a method to decide if one is a permutation 
     of the other.
     */
-//        String[] str3_1 = {
-//            "this",             // true
-//            "wloud this krow",  // true
-//            "Ryan Donahoe",     // false
-//            "Jam Hilpret",      // true
-//            "String "           // false
-//        };
-//        String[] str3_2 = {
-//            "tihs",            
-//            "would this work",  
-//            "Bran Donahoe",     
-//            "Jim Halpret",     
-//            "String"            
-//        };
-//        
-//        for (int i = 0; i < strs.length; i++) {
-//            System.out.println(isPerm(str3_1[i], str3_2[i]));
-//        }
+        System.out.println("1.3 ===");
+        String[] str3_1 = {
+            "this",             // true
+            "wloud this krow",  // true
+            "Ryan Donahoe",     // false
+            "Jam Hilpret",      // true
+            "String "           // false
+        };
+        String[] str3_2 = {
+            "tihs",            
+            "would this work",  
+            "Bran Donahoe",     
+            "Jim Halpret",     
+            "String"            
+        };
+        
+        for (int i = 0; i < str3_1.length; i++) {
+            System.out.println(isPerm(str3_1[i], str3_2[i]));
+        }
 
     
     /*
@@ -111,16 +98,17 @@ public class CTCI_ArraysStrings {
     a2blc5a3. If the "compressed" string would not become smaller than the 
     original string, your method should return the original string.
     */  
-//        String[] str5 = {
-//            "accccccccdda",         // true
-//            "ffffffgggghh",     // false
-//            "jj",               // false
-//            "abc",              // true
-//            "abbbbb"            // true
-//        };
-//        for (String s : str5) {
-//            System.out.println(compressString(s));
-//        }
+        System.out.println("1.5 =====");
+        String[] str5 = {
+            "accccccccdda",         // true
+            "ffffffgggghh",     // false
+            "jj",               // false
+            "abc",              // true
+            "abbbbb"            // true
+        };
+        for (String s : str5) {
+            System.out.println(compressString(s));
+        }
         
 
     /*
@@ -128,33 +116,79 @@ public class CTCI_ArraysStrings {
     the image is 4 bytes, write a method to rotate the image by 90 degrees. 
     Can you do this in place?
     */
-//        int mat6[][] = 
-//        {
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
-//            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
-//        };
-//        turnNinety(mat6, 15);
-//        
-//        for(int[] i : mat6) {
-//            for(int j : i) {
-//                System.out.print(j);
-//                System.out.print(' ');
-//            }
-//            System.out.println();
-//        }
+        System.out.println("1.6 ======");
+        int mat6[][] = 
+        {
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15},
+            {1,2,3,4,5,6,7,8,9,10,11,12,13,14,15}
+        };
+        turnNinety(mat6, 15);
+        
+        for(int[] i : mat6) {
+            for(int j : i) {
+                System.out.print(j);
+                System.out.print(' ');
+            }
+            System.out.println();
+        }
+
+
+    /*
+    1.7 Write an algorithm such that if an element in an MxN matrix is 0, its 
+    entire row and column are set to 0.
+    */
+        System.out.println("1.7 =======");
+        int[][] mat7 = 
+        {
+            {1,2,3,4,5,6,7,8,9},
+            {1,2,3,0,5,6,7,8,9},
+            {1,2,3,4,5,6,7,8,9},
+            {1,2,3,4,5,6,0,8,9},
+            {1,2,3,4,5,6,7,8,9},
+            {1,2,3,4,5,6,0,8,9},
+            {1,2,3,4,5,6,7,8,9},
+            {1,2,3,4,5,6,7,8,9},
+            {1,1,3,4,5,6,7,8,9},
+            {1,2,3,4,5,6,7,8,9},
+            {1,2,3,4,5,6,7,8,9},
+            {1,2,3,4,5,6,7,8,9}
+        };
+        
+        zeroFill(mat7, 12, 9);
+        for(int[] i : mat7) {
+            for(int j : i) {
+                System.out.print(j);
+                System.out.print(' ');
+            }
+            System.out.println();
+        }
+
+
+    /*
+    1.8 Assume you have a method isSubstring which checks if one word is a 
+    substring of another. Given two strings, si and s2, write code to check 
+    If s2 is a rotation of s1 using only one call to isSubstring 
+    (e.g., "waterbottLe" is a rotation of "erbottLewat").
+    */
+        System.out.println("1.8 ========");
+        String s8_1 = "waterbottLe";
+        String s8_2 = "rbottLewate";
+        
+        System.out.println(isRotation(s8_1, s8_2));
+
     }
     
     // 1.1
@@ -298,5 +332,47 @@ public class CTCI_ArraysStrings {
                 m[j][end] = temp;
             }
         }
+    }
+    
+    // 1.7
+    public static void zeroFill(int[][] m, int r, int c) {
+        HashSet rows = new HashSet();
+        HashSet columns = new HashSet();
+        int temp;
+        
+        // no patternt to matrix so it needs to check each element for a zero
+        for(int i = 0; i < r; i++) {
+            for(int j = 0; j < c; j++) {
+                if (m[i][j] == 0) {
+                    rows.add(i);
+                    columns.add(j);
+                }
+            }
+        }
+        
+        Iterator itr = rows.iterator();
+        while(itr.hasNext()) {
+            temp = (int)itr.next();
+            for(int i = 0; i < c; i++) {
+                m[temp][i] = 0;
+            }
+        }
+        
+        itr = columns.iterator();
+        while(itr.hasNext()) {
+            temp = (int)itr.next();
+            for(int i = 0; i < r; i++) {
+                m[i][temp] = 0;
+            }
+        }
+    }
+    
+    // 1.8
+    public static boolean isRotation(String s1, String s2) {
+        if(s1.length() != s2.length())
+            return false;
+        
+        String ss = s1 + s1;
+        return ss.contains(s2);   
     }
 }
