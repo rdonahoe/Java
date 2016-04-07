@@ -27,6 +27,14 @@ public class Tree<T> {
 			this.height = 1;
 		}
 		
+		public TreeNode(TreeNode<T> rep) {
+			this.key = rep.key;
+			this.value = rep.value;
+			this.left = rep.left;
+			this.right = rep.right;
+			this.height = rep.height;
+		}
+		
 		// height getter is a static method so that it can be used on possibly null nodes to return 0.
 		// it is an O(1) operation because height is updated a nodes are added or removed
 		public static<T> int getHeight(TreeNode<T> node) {

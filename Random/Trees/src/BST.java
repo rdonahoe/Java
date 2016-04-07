@@ -7,8 +7,6 @@
  * by Ryan Donahoe
  */
 
-import java.util.Random;
-
 public class BST<T> extends Tree<T> {
 	
 	public BST() {
@@ -42,11 +40,13 @@ public class BST<T> extends Tree<T> {
 				// to caller so they can update that node's height, etc.
 				parent.right = child;
 				parent.height = 1 + Math.max(TreeNode.getHeight(parent.left), 1);
+				updateHeight(parent);
 				return parent.height;
 			}
 			else {
 				// continue on to the right node and weight for a height to pass back to update this height.
 				parent.height = 1 + Math.max(TreeNode.getHeight(parent.left), recAdd(parent.right, child));
+				updateHeight(parent);
 				return parent.height;
 			}
 		}
@@ -54,10 +54,12 @@ public class BST<T> extends Tree<T> {
 			if(parent.left == null) {
 				parent.left = child;
 				parent.height = 1 + Math.max(1, TreeNode.getHeight(parent.right));
+				updateHeight(parent);
 				return parent.height;
 			}
 			else {
 				parent.height = 1 + Math.max(recAdd(parent.left, child), TreeNode.getHeight(parent.right));
+				updateHeight(parent);
 				return parent.height;
 			}
 		}
@@ -97,12 +99,14 @@ public class BST<T> extends Tree<T> {
 					// move down to the node since we know we will be able to remove it without needing the parent
 					// also update height and pass it up
 					parent.height = 1 + Math.max(TreeNode.getHeight(parent.left), recRemove(parent.right, key));
+					updateHeight(parent);
 					return parent.height;
 				}
 			}
 			else {
 				// this isn't the node we are looking for so move to the right child and wait to update this height
 				parent.height = 1 + Math.max(TreeNode.getHeight(parent.left), recRemove(parent.right, key));
+				updateHeight(parent);
 				return parent.height;
 			}
 		}
@@ -114,11 +118,13 @@ public class BST<T> extends Tree<T> {
 				}
 				else {
 					parent.height = 1 + Math.max(recRemove(parent.left, key), TreeNode.getHeight(parent.right));
+					updateHeight(parent);
 					return parent.height;
 				}
 			}
 			else {
 				parent.height = 1 + Math.max(recRemove(parent.left, key), TreeNode.getHeight(parent.right));
+				updateHeight(parent);
 				return parent.height;
 			}
 		}
@@ -153,6 +159,7 @@ public class BST<T> extends Tree<T> {
 			
 			// once parent has been replaced, update height of this in case it was changed while grabbing a deeper node
 			parent.height = 1 + Math.max(TreeNode.getHeight(parent.left), TreeNode.getHeight(parent.right));
+			updateHeight(parent);
 			return parent.height;
 		}
 		else {
@@ -185,6 +192,7 @@ public class BST<T> extends Tree<T> {
 			parent.left = parent.left.left;
 			parent.right = parent.left.right;
 			parent.height = parent.left.height;
+			updateHeight(parent);
 			return parent.height;
 		}
 		else if(parent.right.right == null) {
@@ -202,11 +210,13 @@ public class BST<T> extends Tree<T> {
 			}
 			// update height and pass it up
 			parent.height = 1 + Math.max(TreeNode.getHeight(parent.left), TreeNode.getHeight(parent.right));
+			updateHeight(parent);
 			return parent.height;
 		}
 		else {
 			// we haven't found the largest yet so move down to right child while this call waits for an updated height
 			parent.height = 1 + Math.max(TreeNode.getHeight(parent.left), removeLargest(parent.right, res));
+			updateHeight(parent);
 			return parent.height;
 		}
 	}
@@ -232,6 +242,7 @@ public class BST<T> extends Tree<T> {
 			parent.left = parent.right.left;
 			parent.right = parent.right.right;
 			parent.height = parent.right.height;
+			updateHeight(parent);
 			return parent.height;
 		}
 		else if(parent.left.left == null) {
@@ -245,12 +256,19 @@ public class BST<T> extends Tree<T> {
 				parent.left = parent.left.right;
 			}
 			parent.height = 1 + Math.max(TreeNode.getHeight(parent.left), TreeNode.getHeight(parent.right));
+			updateHeight(parent);
 			return parent.height;
 		}
 		else {
 			parent.height = 1 + Math.max(removeSmallest(parent.left, res), TreeNode.getHeight(parent.right));
+			updateHeight(parent);
 			return parent.height;
 		}
+	}
+	
+	// a blank method that has no use for a BST but may be useful for an AVL tree in the future
+	public void updateHeight(TreeNode<T> parent) {
+
 	}
 	
 	// O(log(n)) operation to retrieve node's value
@@ -318,16 +336,4 @@ public class BST<T> extends Tree<T> {
 		if(parent.right != null) inOrderPrint(parent.right);
 		System.out.println(String.format("(key = %d, val = %s)", parent.key, parent.value));
 	}
-	
-	public static void main(String[] args) {
-		BST<Integer> tree = new BST<Integer>();
-		Random rand = new Random();
-		
-		for(int i = 0; i < 100; i++) {
-			tree.add(rand.nextInt(200) + 1, 0);
-		}
-		
-		tree.printTree(0);
-	}
-	
 }
