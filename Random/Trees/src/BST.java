@@ -327,13 +327,13 @@ public class BST<T> extends Tree<T> {
 	
 	private void preOrderPrint(TreeNode<T> parent) {
 		System.out.println(String.format("(key = %d, val = %s)", parent.key, parent.value));
-		if(parent.left != null) inOrderPrint(parent.left);
-		if(parent.right != null) inOrderPrint(parent.right);
+		if(parent.left != null) preOrderPrint(parent.left);
+		if(parent.right != null) preOrderPrint(parent.right);
 	}
 	
 	private void postOrderPrint(TreeNode<T> parent) {
-		if(parent.left != null) inOrderPrint(parent.left);
-		if(parent.right != null) inOrderPrint(parent.right);
+		if(parent.left != null) postOrderPrint(parent.left);
+		if(parent.right != null) postOrderPrint(parent.right);
 		System.out.println(String.format("(key = %d, val = %s)", parent.key, parent.value));
 	}
 }
