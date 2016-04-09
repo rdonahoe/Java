@@ -1,16 +1,16 @@
 
-public class AVLTree<T> extends BST<T> {
+public class AVLTree<K extends Comparable<K>, V> extends BST<K, V> {
 
 	public AVLTree() {
 		super();
 	}
 	
-	public AVLTree(int key, T value) {
+	public AVLTree(K key, V value) {
 		super(key, value);
 	}
 	
 	// method override checking height changes and triggering rebalancing if height difference is 2 or more
-	public void updateHeight(TreeNode<T> parent) {
+	public void updateHeight(TreeNode<K, V> parent) {
 		int lh = TreeNode.getHeight(parent.left);
 		int rh = TreeNode.getHeight(parent.right);
 		
@@ -45,11 +45,11 @@ public class AVLTree<T> extends BST<T> {
 	
 	// rotates tree right for rebalancing. Slightly complex but allows operation to be done 
 	// with O(1) run and O(1) space since it is using already allocated nodes
-	private void rightRotation(TreeNode<T> parent) {
-		TreeNode<T> newRight = parent.left;
-		TreeNode<T> newLeft = parent.left.left;
-		int tempKey = newRight.key;
-		T tempVal = newRight.value;
+	private void rightRotation(TreeNode<K, V> parent) {
+		TreeNode<K, V> newRight = parent.left;
+		TreeNode<K, V> newLeft = parent.left.left;
+		K tempKey = newRight.key;
+		V tempVal = newRight.value;
 		
 		// old parent becomes new parent's right node
 		newRight.left = newRight.right;
@@ -66,11 +66,11 @@ public class AVLTree<T> extends BST<T> {
 		parent.height = 1 + Math.max(TreeNode.getHeight(parent.left), TreeNode.getHeight(parent.right));
 	}
 	
-	private void leftRotation(TreeNode<T> parent) {
-		TreeNode<T> newLeft = parent.right;
-		TreeNode<T> newRight = parent.right.right;
-		int tempKey = newLeft.key;
-		T tempVal = newLeft.value;
+	private void leftRotation(TreeNode<K, V> parent) {
+		TreeNode<K, V> newLeft = parent.right;
+		TreeNode<K, V> newRight = parent.right.right;
+		K tempKey = newLeft.key;
+		V tempVal = newLeft.value;
 		
 		// old parent becomes new parent's left node
 		newLeft.right = newRight.left;
@@ -88,7 +88,7 @@ public class AVLTree<T> extends BST<T> {
 	}
 	
 	public static void main(String[] args) {
-		AVLTree<Integer> tree = new AVLTree<Integer>();
+		AVLTree<Integer, Integer> tree = new AVLTree<Integer, Integer>();
 		
 		tree.add(3, 0);
 		tree.add(5, 0);

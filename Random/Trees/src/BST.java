@@ -7,13 +7,13 @@
  * by Ryan Donahoe
  */
 
-public class BST<T> extends Tree<T> {
+public class BST<K extends Comparable<K>, V> extends Tree<K, V> {
 	
 	public BST() {
 		super();
 	}
 	
-	public BST(int key, T value) {
+	public BST(K key, V value) {
 		super(key, value);
 	}
 	
@@ -21,8 +21,8 @@ public class BST<T> extends Tree<T> {
 		return super.getHeight();
 	}
 	
-	public void add(int key, T value) {
-		TreeNode<T> temp = new TreeNode<T>(key, value);
+	public void add(K key, V value) {
+		TreeNode<K, V> temp = new TreeNode<K, V>(key, value);
 		if(root == null) {
 			root = temp;
 		}
@@ -33,8 +33,8 @@ public class BST<T> extends Tree<T> {
 	
 	// adds to tree recursively because otherwise updating the height would be much more complicated.
 	// it is also private to keep programmers from trying to add the harder way.
-	private int recAdd(TreeNode<T> parent, TreeNode<T> child) {
-		if(child.key > parent.key) {
+	private int recAdd(TreeNode<K, V> parent, TreeNode<K, V> child) {
+		if(child.key.compareTo(parent.key) > 0) {
 			if(parent.right == null) {
 				// found free space on right. Update parent height and then pass it back 
 				// to caller so they can update that node's height, etc.
@@ -50,7 +50,7 @@ public class BST<T> extends Tree<T> {
 				return parent.height;
 			}
 		}
-		else if(child.key < parent.key) {
+		else if(child.key.compareTo(parent.key) < 0) {
 			if(parent.left == null) {
 				parent.left = child;
 				parent.height = 1 + Math.max(1, TreeNode.getHeight(parent.right));
@@ -70,9 +70,9 @@ public class BST<T> extends Tree<T> {
 		}
 	}
 	
-	public void remove(int key) {
+	public void remove(K key) {
 		if(root != null) {
-			if(root.key == key && root.left == null && root.right == null) {
+			if(root.key.compareTo(key) == 0 && root.left == null && root.right == null) {
 				root = null;
 			}
 			else {
@@ -84,11 +84,11 @@ public class BST<T> extends Tree<T> {
 	// also recursive and private for the same reason as 'recAdd'
 	// with the replacement of the removed node to make sure the tree is still organized correctly,
 	// this algorithm is O(h) where h is the height of the tree.
-	private int recRemove(TreeNode<T> parent, int key) {
+	private int recRemove(TreeNode<K, V> parent, K key) {
 		// check if the key we are looking for is greater, less than, or equal to. Also check if it is possible to go any further
-		if(key > parent.key && parent.right != null) {
+		if(key.compareTo(parent.key) > 0 && parent.right != null) {
 			// is the next node the one we are looking for.
-			if(parent.right.key == key) {
+			if(parent.right.key.compareTo(key) == 0) {
 				
 				// if right has no children just null it out and return 0 because that is the height of a null node
 				if(TreeNode.getHeight(parent.right.left) == 0 && TreeNode.getHeight(parent.right.right) == 0) {
@@ -110,8 +110,8 @@ public class BST<T> extends Tree<T> {
 				return parent.height;
 			}
 		}
-		else if(key < parent.key && parent.left != null) {
-			if(parent.left.key == key) {
+		else if(key.compareTo(parent.key) < 0 && parent.left != null) {
+			if(parent.left.key.compareTo(key) == 0) {
 				if(TreeNode.getHeight(parent.left.left) == 0 && TreeNode.getHeight(parent.left.right) == 0) {
 					parent.left = null;
 					return 0;
@@ -128,7 +128,7 @@ public class BST<T> extends Tree<T> {
 				return parent.height;
 			}
 		}
-		else if (key == parent.key) {
+		else if (key.compareTo(parent.key) == 0) {
 			// this is the node we want to remove so we can't just say this = null. We have to replace this node with some deeper child
 			int lh = TreeNode.getHeight(parent.left);
 			int rh = TreeNode.getHeight(parent.right);
@@ -169,8 +169,8 @@ public class BST<T> extends Tree<T> {
 	}
 	
 	// no reason for this to be recursive to it just iterates down to the right of the tree with a cursor.
-	public TreeNode<T> getLargest() {
-		TreeNode<T> cur = root;
+	public TreeNode<K, V> getLargest() {
+		TreeNode<K, V> cur = root;
 		while(cur.right != null) {
 			cur = cur.right;
 		}
@@ -180,7 +180,7 @@ public class BST<T> extends Tree<T> {
 	
 	// this function needs to update height so it is recursive
 	// is passed a parent node (where the search starts) and a result node (the node being replaced)
-	public int removeLargest(TreeNode<T> parent, TreeNode<T> res) {
+	public int removeLargest(TreeNode<K, V> parent, TreeNode<K, V> res) {
 		// if we can't go any further right, but we do have a left node
 		// replace result with parent and then replace parent with parent's left child.
 		if(parent.right == null && parent.left != null) {
@@ -222,8 +222,8 @@ public class BST<T> extends Tree<T> {
 	}
 	
 	// same as 'getLargest'
-	public TreeNode<T> getSmallest() {
-		TreeNode<T> cur = root;
+	public TreeNode<K, V> getSmallest() {
+		TreeNode<K, V> cur = root;
 		while(cur.left != null) {
 			cur = cur.left;
 		}
@@ -232,7 +232,7 @@ public class BST<T> extends Tree<T> {
 	}
 	
 	// same algorithm as 'removeLargest', just flipped
-	public int removeSmallest(TreeNode<T> parent, TreeNode<T> res) {
+	public int removeSmallest(TreeNode<K, V> parent, TreeNode<K, V> res) {
 		if(parent.left == null && parent.right != null) {
 			res.key = parent.key;
 			res.value = parent.value;
@@ -267,21 +267,21 @@ public class BST<T> extends Tree<T> {
 	}
 	
 	// a blank method that has no use for a BST but may be useful for an AVL tree in the future
-	public void updateHeight(TreeNode<T> parent) {
+	public void updateHeight(TreeNode<K, V> parent) {
 
 	}
 	
 	// O(log(n)) operation to retrieve node's value
-	public T get(int key) {
-		TreeNode<T> cur = root;
+	public V get(K key) {
+		TreeNode<K, V> cur = root;
 		while(cur != null) {
-			if(key == cur.key) {
+			if(key.compareTo(cur.key) == 0) {
 				return cur.value;
 			}
-			else if(key > cur.key && cur.right != null) {
+			else if(key.compareTo(cur.key) > 0 && cur.right != null) {
 				cur = cur.right;
 			}
-			else if(key < cur.key && cur.left != null) {
+			else if(key.compareTo(cur.key) < 0 && cur.left != null) {
 				cur = cur.left;
 			}
 			else {
@@ -292,7 +292,7 @@ public class BST<T> extends Tree<T> {
 	}
 	
 	// uses 'get' method to check if tree contains a key
-	public boolean contains(int key) {
+	public boolean contains(K key) {
 		if(get(key) == null) return false;
 		return true;
 	}
@@ -319,21 +319,21 @@ public class BST<T> extends Tree<T> {
 	// these traversals are done recursively because an iterative approach with this implementation 
 	// would have a runtime of O(nlog(n)) while recursion has a runtime of just O(n)
 	// an iterative approach is also much more complicated when it comes to traversals
-	private void inOrderPrint(TreeNode<T> parent) {
+	private void inOrderPrint(TreeNode<K, V> parent) {
 		if(parent.left != null) inOrderPrint(parent.left);
-		System.out.println(String.format("(key = %d, val = %s)", parent.key, parent.value));
+		System.out.println(String.format("(key = %s, val = %s)", parent.key.toString(), parent.value.toString()));
 		if(parent.right != null) inOrderPrint(parent.right);
 	}
 	
-	private void preOrderPrint(TreeNode<T> parent) {
-		System.out.println(String.format("(key = %d, val = %s)", parent.key, parent.value));
+	private void preOrderPrint(TreeNode<K, V> parent) {
+		System.out.println(String.format("(key = %s, val = %s)", parent.key.toString(), parent.value.toString()));
 		if(parent.left != null) preOrderPrint(parent.left);
 		if(parent.right != null) preOrderPrint(parent.right);
 	}
 	
-	private void postOrderPrint(TreeNode<T> parent) {
+	private void postOrderPrint(TreeNode<K, V> parent) {
 		if(parent.left != null) postOrderPrint(parent.left);
 		if(parent.right != null) postOrderPrint(parent.right);
-		System.out.println(String.format("(key = %d, val = %s)", parent.key, parent.value));
+		System.out.println(String.format("(key = %s, val = %s)", parent.key.toString(), parent.value.toString()));
 	}
 }
